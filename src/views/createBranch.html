@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Crear Sucursal</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            form {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            input[type="text"], input[type="email"], input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                margin: 5px 0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            input[type="submit"], button {
+                background-color: #29649f;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 400px;
+            }
+            input[type="submit"]:hover {
+                background-color: #4563a0;
+            }
+            .button-container {
+                max-width: 400px;
+                margin: 0 auto;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>    
+        <h2 style="text-align: center; color: #4563a0;">BlueGestion</h2>
+        <h3 style="text-align: center;">Crear Sucursal</h3>
+
+        <form id="branchForm">
+            <label for="nameBranch">Nombre de la Sucursal:</label>
+            <input type="text" id="nameBranch" name="nameBranch" required>
+            
+            <label for="phoneBranch">Teléfono:</label>
+            <input type="text" id="phoneBranch" name="phoneBranch" required>
+            
+            <label for="neighborhoodBranch">Barrio:</label>
+            <input type="text" id="neighborhoodBranch" name="neighborhoodBranch" required>
+            
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" name="address" required>
+            
+            <label for="nameContact">Nombre de Contacto:</label>
+            <input type="text" id="nameContact" name="nameContact" required>            
+            <br><br>
+            <input type="submit" value="Crear Sucursal">
+        </form>
+        <br>
+        <div class="button-container">
+            <a href="/home">
+                <button style="max-width: 400px;">Regresar</button>
+            </a>
+        </div>
+
+        <script>
+        
+            document.getElementById("branchForm").addEventListener("submit", async function(event) {
+                event.preventDefault();
+                
+                const formData = new FormData(this);
+                const requestData = {};
+                formData.forEach((value, key) => {
+                    requestData[key] = value;
+                });
+                
+                try {
+                    const response = await fetch("/branch/create", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(requestData)
+                    });
+                    
+                    const data = await response.json();
+        
+                    if (response.ok) {
+                        window.location.href = "/home";
+                        console.log("Branch created successfully");
+                    } else {
+                        console.error("Error en la respuesta del servidor:", data);
+                        alert("Error al crear la sucursal. Por favor, inténtalo de nuevo.");
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("Error interno del servidor");
+                }
+            });
+        </script>
+
+    </body>    
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .button-container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .button-container button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #29649f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 400px;
+        }
+        .button-container button:hover {
+            background-color: #4563a0;
+        }
+        </style>
+    </head>
+    <body>    
+        <h2 style="text-align: center; color: #4563a0;">BlueGestion</h2>
+        <h2 style="text-align: center;">Bienvenido a la página principal</h2>
+
+        <div class="button-container">
+            <a href="/createUser">
+                <button style="max-width: 400px;">Crear Usuario</button>
+            </a>
+            <a href="/createCustomer">
+                <button style="max-width: 400px;">Crear Cliente</button>
+            </a>
+            <a href="/createProduct">
+                <button style="max-width: 400px;">Crear Producto</button>
+            </a>
+            <a href="/createBranch">
+                <button style="max-width: 400px;">Crear Sucursal</button>
+            </a>
+            <a href="/createOrder">
+                <button style="max-width: 400px;">Crear Orden</button>
+            </a>
+        </div>
+
+    </body>    
+</html>
