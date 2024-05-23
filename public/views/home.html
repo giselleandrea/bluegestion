@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BlueGestion</title>
+        <link rel="stylesheet" href="../styles/styles.css">
+    </head>
+    <body>    
+
+        <header>
+            <h1>BlueGestion</h1>
+            <a href="/login">
+                <button class="logout-button">Cerrar Sesión</button>
+            </a>
+        </header>
+
+
+        <div class="container_home">
+
+            <div class="button-row">
+                <div class="button-group">
+                    <p>Crea usuarios para la gestion de ordenes</p>
+                    <a href="/createUser">
+                        <button class="button blue1">Crear Usuario</button>
+                    </a>
+                </div>
+                <div class="button-group">
+                    <p>Añade la sucusrsales para distribución</p>
+                    <a href="/createBranch">
+                        <button class="button blue2">Crear Sucursal</button>
+                    </a>
+                </div>
+                <div class="button-group">
+                    <p>Añade la informacion de los clientes con sucursales</p>
+                    <a href="/createCustomer">
+                        <button class="button blue1">Crear Cliente</button>
+                    </a>
+                </div> 
+            </div>    
+
+            <div class="button-row">
+                <div class="button-group">
+                    <p>Administrar productos</p>
+                    <a href="/createProduct">
+                        <button class="button blue4">Productos</button>
+                    </a>
+                </div>
+                <div class="button-group">
+                    <p>Administrar ordenes y pédidos</p>
+                    <a href="/createOrder">
+                        <button class="button blue5">Ordenes</button>
+                    </a>
+                </div> 
+            </div> 
+
+        </div>  
+
+        <script src="../javascript/home.js"></script>
+        
+    </body>    
+</html>

@@ -9,9 +9,9 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true  
+    "emitDecoratorMetadata": true,
   },
-  "include": ["src/**/*", "tests/**/*"],
+  "include": ["src/**/*", "tests/**/*", "public/styles", "public/javascript/home.js", "public/javascript/login.js"],
   "exclude": ["node_modules"]
   
 }

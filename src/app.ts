@@ -14,6 +14,8 @@ import AppDataSource from "./database/db";
 import { graphqlHTTP } from "express-graphql";
 import schema from "./database/schema";
 import resolvers  from "./database/resolvers";
+import path from "path";
+import session from 'express-session';
 
 const app = express();
 
@@ -22,6 +24,8 @@ app.use(express.json());
 //middleware
 app.use(morgan("dev"));
 app.use(cors());
+//Archivos estaticos
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(routes);
 app.use(userRoutes);
@@ -29,6 +33,13 @@ app.use(productRoutes);
 app.use(branchRoutes);
 app.use(customerRoutes);
 app.use(orderRoutes);
+
+app.use(session({
+    secret: 'BLU3g35t10NuC3NtL4L',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // secure: true si es HTTPS
+}));
 
 async function main() {
     try {

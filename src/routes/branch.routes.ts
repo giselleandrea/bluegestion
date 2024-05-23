@@ -6,7 +6,7 @@ const router = Router();
 
 //views 
 router.get("/createBranch", (req, res) => {
-    res.sendFile(path.join(__dirname, '../views', 'createBranch.html'));
+    res.sendFile(path.join(__dirname, '../../public/views', 'createBranch.html'));
 });
 
 //controllers

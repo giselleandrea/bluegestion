@@ -113,7 +113,9 @@ const getProduct = async (req: Request, res: Response) => {
 
 const getProducts = async (req: Request, res:Response) => {
     try {
-        const allProducts = await Product.find();
+        const allProducts = await Product.find({
+            relations: ['category']
+        });
 
         if (allProducts.length === 0) {
             return res.status(404).json({
@@ -135,7 +137,9 @@ const getProducts = async (req: Request, res:Response) => {
 
 const getCategories = async (req: Request, res: Response) => {
     try {
-        const allCategories = await Category.find();
+        const allCategories = await Category.find({
+            relations: ['category']
+        });
 
         if (allCategories.length === 0) {
             return res.status(404).json({

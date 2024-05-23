@@ -35,7 +35,7 @@ export class Customer extends BaseEntity {
     @ManyToOne(() => Branch, (branch) => branch.customers)
     branch: Branch;
 
-    @OneToMany(() => Order, (order) => order.user)
+    @OneToMany(() => Order, (order) => order.customer)
     orders: Order[];
 
     @CreateDateColumn()

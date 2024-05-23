@@ -35,9 +35,6 @@ export class User extends BaseEntity {
     @ManyToOne(() => TypeUser, (typeUser) => typeUser.users)
     typeUser: TypeUser;
 
-    @OneToMany(() => Order, (order) => order.user)
-    orders: Order[];
-
     @CreateDateColumn()
     created_at: Date;
 

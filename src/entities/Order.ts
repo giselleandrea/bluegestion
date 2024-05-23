@@ -30,9 +30,6 @@ export class Order extends BaseEntity {
     @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order)
     orderProducts: OrderProduct[];
 
-    @ManyToOne(() => User, (user) => user.orders)
-    user: User;
-
     @ManyToOne(() => Customer, (customer) => customer.orders)
     customer: Customer;
 

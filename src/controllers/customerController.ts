@@ -70,7 +70,9 @@ const getCustomer = async (req: Request, res: Response) => {
 
 const getCustomers = async (req: Request, res:Response) => {
     try {
-        const allCustomers = await Customer.find();
+        const allCustomers = await Customer.find({
+            relations: ['branch']
+        });
 
         if (allCustomers.length === 0) {
             return res.status(404).json({

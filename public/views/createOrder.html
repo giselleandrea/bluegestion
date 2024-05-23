@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Orden</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    
+    <header>
+        <h1>BlueGestion</h1>
+    </header>
+
+    <div class="content">
+        <div class="header-section">
+            <h2>ORDENES</h2>
+            <a class="button-container" href="/home">
+                <button class="back-button">Regresar</button>
+            </a>
+        </div>
+        
+        <div class="container-product" >
+            <form id="orderForm" class="form-section">
+                
+                <label for="referenceOrder">Referencia de la Orden:</label>
+                <input type="text" id="referenceOrder" name="referenceOrder" required>
+
+                <label for="totalAmount">Monto Total:</label>
+                <input type="number" id="totalAmount" name="totalAmount" required>
+            
+                <label for="customerId">Cliente:</label>
+                <select id="customerSelect" name="customerId" required></select>
+            
+                <label for="productId">Productos:</label>
+                <div id="productEntriesContainer"></div>
+                <button class="create-product-button" type="button" id="addProductButton">Agregar Producto</button>
+
+                <br>
+                <input type="submit" value="Crear Orden">
+            </form>
+        </div>
+
+        <div class="container-product" >
+            <div>         
+                <div class="search-container">
+                    <label for="searchInput">Buscar:</label>
+                    <input type="text" id="searchInput" placeholder="Buscar por Orden">
+                </div>
+
+                <table id="orderTable">
+                    <thead>
+                        <tr>
+                            <th>Orden</th>
+                            <th>Estado</th>
+                            <th>Valor total</th>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Fecha orden</th>
+                            <th>Productos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../javascript/order.js"></script>
+
+</body>
+</html>

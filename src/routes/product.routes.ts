@@ -6,7 +6,7 @@ const router = Router();
 
 //views 
 router.get("/createProduct", (req, res) => {
-    res.sendFile(path.join(__dirname, '../views', 'createProduct.html'));
+    res.sendFile(path.join(__dirname, '../../public/views', 'createProduct.html'));
 });
 
 //controllers

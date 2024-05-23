@@ -2,14 +2,13 @@ import { Request, Response } from 'express';
 import { Order } from '../entities/Order';
 import { OrderProduct } from '../entities/OrderProduct';
 import { Product } from '../entities/Product';
+import { User } from '../entities/User';
 
 const createOrder = async (req: Request, res: Response) => {
     try {
         const {
             referenceOrder,
-            statusOrder,
             totalAmount,
-            userId,
             customerId,
             productIds,
         } = req.body;
@@ -19,7 +18,6 @@ const createOrder = async (req: Request, res: Response) => {
             "referenceOrder": "tu_referencia",
             "statusOrder": "tu_estado",
             "totalAmount": 100.50,
-            "userId": "id_del_usuario",
             "customerId": "id_del_cliente",
             "productIds": [
                 {"productId": "id_del_producto_1", "cant": 3},
@@ -39,9 +37,8 @@ const createOrder = async (req: Request, res: Response) => {
 
         const newOrder = new Order();
         newOrder.referenceOrder = referenceOrder
-        newOrder.statusOrder = statusOrder
+        newOrder.statusOrder = "Recibida"
         newOrder.totalAmount = totalAmount;
-        newOrder.user = userId,
         newOrder.customer = customerId,
         await newOrder.save();
 
@@ -52,6 +49,13 @@ const createOrder = async (req: Request, res: Response) => {
             if (!product) {
                 return res.status(404).json({ message: `No se pudo encontrar el producto con el ID ${productId}` });
             }
+
+            if (product.stock < cant) {
+                return res.status(400).json({ message: `Stock insuficiente para el producto ${productId}` });
+            }
+
+            product.stock -= cant;
+            await product.save();
 
             const newOrderProduct = new OrderProduct();
             newOrderProduct.order = newOrder;
@@ -67,6 +71,39 @@ const createOrder = async (req: Request, res: Response) => {
             message: 'Order creada correctamente', 
             data: newOrder.referenceOrder        
         });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
+
+const updateStatusOrder = async (req: Request, res: Response) => {
+    try {
+        const {
+            order_id,
+            statusOrder,
+        } = req.body;
+
+        const existingOrder = await Order.findOne({
+            where: {id: order_id},
+        });
+
+        if (!existingOrder) {
+            return res.status(404).json({
+                success: false,
+                message: 'Not found for the specified order_id',
+            });
+        }
+
+        existingOrder.statusOrder = statusOrder;
+        await existingOrder.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Estado de la orden actualizado correctamente',
+            data: existingOrder,
+        });
+
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
@@ -112,7 +149,7 @@ const getOrderProduct = async (req: Request, res: Response) => {
 const getOrderProducts = async (req: Request, res: Response) => {
     try {
         const existingOrders = await Order.find({
-            relations: ['customer']
+            relations: ['customer']               
         });
 
         if (!existingOrders || existingOrders.length === 0) {
@@ -126,7 +163,7 @@ const getOrderProducts = async (req: Request, res: Response) => {
 
         for (const existingOrder of existingOrders) {
             const findOrderProduct = await OrderProduct.find({
-                where: { order: existingOrder },
+                where: { order: { id: existingOrder.id } },
                 relations: ['product']
             });
 
@@ -149,5 +186,6 @@ const getOrderProducts = async (req: Request, res: Response) => {
 export default {
     createOrder,
     getOrderProduct,
-    getOrderProducts
+    getOrderProducts,
+    updateStatusOrder
 };
