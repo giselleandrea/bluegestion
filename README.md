@@ -1,5 +1,6 @@
 # bluegestion
 Aplicación para gestionar pedidos 
+API creada por @giselleandrea 
 
 # Versions
 * Node v16.17.0
