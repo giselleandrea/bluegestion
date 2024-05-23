@@ -1,8 +1,12 @@
 # bluegestion
+Aplicación para gestionar pedidos 
 
+# Versions
+* Node v16.17.0
+* typescript 5.3.3
+* pg 8.11.3
+* typeORM 0.3.20
 
-user: postgres
-password: Bluegestion2024
-DB_DATABASE = bluegestion
-DB_PORT = 5432
-DB_HOST: bluegestion.c14o26ykwjxr.us-east-1.rds.amazonaws.com
+* npm install --> instalacion de dependencias.
+* npm run build  --> comprobacion.
+* npm run start  --> ejecucion en ambiente dev. 
